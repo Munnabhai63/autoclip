@@ -1,0 +1,193 @@
+# AutoClip Privacy Policy
+
+*[中文版 →](./PRIVACY.md)*
+
+**Effective Date: June 3, 2026**
+**Last Updated: October 9, 2026**
+
+> ⚠️ This is a draft template. Please have legal counsel review it before publishing (see "Clauses Requiring Legal Review" at the end).
+
+AutoClip ("the Software", "we", "us") is a **local-first** desktop video clipping tool. We take your privacy seriously. This policy explains what information we collect, how we use, store, and protect it, and the rights you have.
+
+This policy is drafted with reference to China's Personal Information Protection Law (PIPL), Cybersecurity Law, and Data Security Law. For users in other regions, see "International Transfers" and the compliance notes below.
+
+---
+
+## 1. Core Principle: Local-First
+
+- **Cutting and rendering stay on your device.** Video, audio, and project files stay on your machine and are not uploaded to our servers.
+- When you choose a cloud model, that data goes directly to the provider, not through our servers. The subtitle route sends the relevant subtitles or copy. If you explicitly enable a cloud visual model, sampled frames and the necessary text are sent as well. Fees depend on that provider.
+- **Third-party API keys you configure** (Qwen, OpenAI, Gemini, DeepSeek, Doubao Seed, Kimi, GLM, Grok) **are stored only on your device**, never uploaded, and never appear in any analytics data. Ollama / LM Studio run as local services.
+- We **do not collect** your name, phone number, or ID documents. An email address is received only if you type one into feedback, and it is not published on the public GitHub post.
+
+---
+
+## 2. Information We Collect
+
+### 2.1 Anonymous Usage Analytics (currently enabled)
+
+To understand how features are used, find and fix problems, and improve the product, the Software collects **anonymous** usage data via **PostHog**. This data **does not include** your video content, subtitle/transcript text, file contents, or API keys.
+
+| Category | Details | Purpose |
+|----------|---------|---------|
+| Device & environment | OS type, CPU architecture, app version, system language | Compatibility & troubleshooting |
+| Usage behavior | Events such as app launch, page views, video import, clip export, saving settings | Measure feature usage & conversion |
+| Outcomes | Success/failure of processing, the failing stage and error code | Improve stability |
+| Anonymous identifier | A randomly generated device ID (stored locally, not linked to your real identity) | Distinguish devices, compute retention |
+
+| Workflow correlation | Independently generated random flow, operation, attempt and artifact tokens; sample/user material category; enumerated setup, connection-test, settings-section and framing results and counts | Relate stages and outcomes and distinguish sample use; internal project/job IDs, model names, addresses and content are not sent |
+
+Local correlation mappings retain up to 500 projects active within 35 days and 100 artifact tokens per project; disabling analytics clears them. Studio project files also retain up to 100 compact execution receipts for state recovery, without video or prompt content. These are local project data and are not deleted by disabling analytics.
+
+- **Anonymity**: We use a randomly generated device identifier and do not build identifiable user profiles.
+- **Recipient**: PostHog Inc., with data stored on its **United States** servers (see Section 6, "International Transfers").
+- **Local buffering**: Events are batched locally before sending; network issues do not affect normal use of the Software.
+- **Feature flags**: The Software requests boolean or enum feature-flag values from PostHog only while Anonymous Usage Analytics is on, to decide whether an interface that is not fully rolled out is shown. Turning analytics off sends no flag request, and every new feature stays at its build-time off default. Flag values do not include video, subtitles, or keys. Experiment overrides stay on this computer and appear only in a development build's settings. Release builds do not show that section.
+
+### 2.2 Crash reports (optional, on by default)
+
+To fix crashes, the Software may send stack traces via **Sentry** when a DSN is configured at build time and you have not turned off **Crash reports** in Settings → App. This does **not** include video content, transcripts, or API keys. `send_default_pii` is off. The client does not explicitly set a user identifier or IP field; the recipient can still obtain connection-source information and may infer an approximate region from it.
+
+### 2.3 Information You Provide
+
+- **In-app feedback**: When you press Send, we receive the note, its category, and the app version, operating system, architecture, model name, failure stage, and a short error summary. That note is published on GitHub: problems become Issues, and ideas or other notes become Discussions. An optional email stays in the maintainer inbox and is not placed on the public post. Sending feedback does not depend on the anonymous analytics switch. Video content, subtitles, and API keys are not included; key-like text in an error summary is redacted before sending.
+- **Third-party platform accounts/cookies**: If you use download or upload features for platforms such as Bilibili or YouTube, the related credentials (cookies, etc.) are **stored only on your device** to perform the actions you initiate. We do not collect or upload them.
+
+### 2.4 Information We Do Not Collect
+
+- Your original video/audio content (our servers do not receive it; a cloud visual model you enable receives sampled frames)
+- Subtitle or transcript text (our servers do not receive it; the subtitle route sends the relevant subtitles or copy to the provider you chose)
+- Plaintext third-party API keys
+- Name, phone number, geolocation, ID documents, or other personally identifying information. An email is collected only if you type it into feedback, and it is not published on GitHub
+
+“We do not collect” means AutoClip and our servers. The cloud provider you configure receives the subtitles or copy that route needs, or sampled frames and the necessary text.
+
+---
+
+## 3. How We Use Information
+
+We use the anonymous data above solely to:
+
+1. Measure feature usage and product funnels (e.g., import-to-export conversion);
+2. Detect and fix defects, and improve stability and performance;
+3. Evaluate the impact of changes and plan product direction.
+
+We **do not** use this data for advertising, and we **do not** sell any of your information.
+
+---
+
+## 4. Your Choices and Rights
+
+### 4.1 Turn Off Usage Analytics
+
+You can disable "Anonymous Usage Analytics" at any time under **Settings → App**. Once disabled, the Software **immediately stops sending usage analytics** and also stops requesting feature flags. This setting persists across restarts. Turning analytics off does not block an explicit feedback submission.
+
+### 4.2 Your Legal Rights
+
+Where applicable (e.g., under PIPL), you have the right to:
+
+- Be informed, access, and obtain a copy;
+- Correct and supplement;
+- Delete;
+- Withdraw consent (i.e., turn off the analytics switch);
+- Deregister (applicable once account features launch).
+
+To exercise these rights or file a complaint, contact us using the details below.
+
+---
+
+## 5. Data Storage and Retention
+
+- **Local data** (projects, videos, subtitles, settings, keys): stored on your device and fully under your control; deleting a project removes its data. Uninstalling keeps this data by default so a reinstall can pick it up:
+  - Windows: tick "Also delete my AutoClip data (projects, settings, API keys)" in the uninstaller to also delete `%APPDATA%\AutoClip` and the app's WebView data (`%APPDATA%\com.autoclip.desktop`, `%LOCALAPPDATA%\com.autoclip.desktop`); it is unticked by default. A silent uninstall deletes the same directories only when `/DELETEAPPDATA` is passed explicitly; upgrades never delete them.
+  - macOS / Linux: delete the data directory `~/Library/Application Support/AutoClip` or `~/.local/share/AutoClip` manually.
+- **Anonymous analytics data**: stored by PostHog, retained according to our retention policy (by default no longer than **12 months**), after which it is automatically deleted or anonymized.
+
+---
+
+## 6. International Transfers
+
+Anonymous usage analytics are stored by PostHog on **United States** servers, which may involve transferring data outside of mainland China. We limit transferred data to anonymous, non-identifying information. **[Legal review item: the lawful basis for cross-border transfer (separate consent / standard contract / security assessment) must be confirmed under PIPL Chapter III. For EU/UK users, an appropriate GDPR transfer mechanism must be assessed.]**
+
+---
+
+## 7. Third-Party Services
+
+| Service | Provider | Purpose | Privacy Policy |
+|---------|----------|---------|----------------|
+| Product analytics | PostHog Inc. | Anonymous usage analytics | https://posthog.com/privacy |
+| Third-party AI models (you configure) | Qwen, OpenAI, Gemini, DeepSeek, Doubao Seed, Kimi, GLM, Grok; Ollama / LM Studio locally | The cloud subtitle route sends subtitles or copy. The cloud visual route sends sampled frames and the necessary text. Local presets stay on the device. Keys stay on your device; you call the provider directly | See each provider's policy |
+| Video platforms (you use) | Bilibili / YouTube, etc. | Downloads/uploads you initiate | See each platform's policy |
+
+When you call third-party AI services directly within the Software, the resulting data flows and privacy rules are governed by that provider's privacy policy. We do not relay or retain those subtitles, that copy, or those sampled frames. Our own cloud model proxy is still not enabled; see Section 10.
+
+---
+
+## 8. Children's Privacy
+
+The Software is intended for adult professional users and is **not directed to children under 14**. We do not knowingly collect children's personal information.
+
+---
+
+## 9. Security Measures
+
+We apply reasonable technical and organizational measures to protect data, including transport encryption (HTTPS), data minimization, anonymization, and keeping keys on-device. However, please understand that no method of internet transmission is completely secure.
+
+---
+
+## 10. Planned Features (not yet enabled)
+
+The following are on our product roadmap and **are not currently active and collect no related data**. Before they go live, we will update this policy, notify you clearly, and **obtain your separate consent** where personal information is involved:
+
+- **Accounts**: optional sign-up/login in the future to sync settings, usage quotas, etc. This would collect necessary account information.
+- **Cloud LLM proxy**: in the future, if you opt to use our hosted model proxy, **your subtitle/transcript text would be forwarded through our proxy servers** to perform AI processing. This is optional; until enabled, text never leaves your device.
+- **Payments & metering**: we may introduce top-ups, subscriptions, etc., processing transaction information through compliant payment channels.
+
+---
+
+## 11. Policy Updates
+
+When our data practices change, we will update this policy and revise the "Last Updated" date. Material changes will be communicated through means such as in-app notices.
+
+---
+
+## 12. Contact Us
+
+For any questions, comments, or complaints about this Privacy Policy or our handling of personal information, contact:
+
+- Email: **christine95zhouye@gmail.com**
+- Website: **https://zhouxiaoka.github.io/autoclip_intro/**
+
+---
+
+---
+
+## Compliance Checklist
+
+| Regulation | Status | Notes |
+|-----------|--------|-------|
+| PIPL (China) | ⚠️ Partial | Currently anonymous data; cross-border & separate-consent path pending legal review |
+| Data Security Law / Cybersecurity Law | ✅ Largely compliant | Local-first, data minimization |
+| GDPR (if serving EU users) | ⚠️ To assess | Currently PostHog US region; EU expansion needs lawful basis & EU region |
+| CCPA (if serving California users) | ⚠️ To assess | Assess before overseas release |
+| COPPA / children | ✅ N/A | Not directed to children |
+
+## Clauses Requiring Legal Review
+
+| Clause | Why | Priority |
+|--------|-----|----------|
+| Section 6 — Cross-border transfer (PostHog US) | PIPL requires a clear lawful basis (separate consent / standard contract / security assessment) | High |
+| "Anonymous" characterization | Whether device ID + behavioral data constitutes identifiable personal information affects whether separate consent is required | High |
+| Section 5 — Retention period | Confirm the specific retention duration | Medium |
+| Section 10 — Planned features (cloud proxy handling user text) | Must be rewritten as formal terms with separate consent before launch | Medium (before enabling) |
+| Overseas release (GDPR/CCPA) | Add corresponding sections before expanding to overseas markets | Low (per Roadmap Phase 3) |
+
+## Implementation Checklist
+
+- [x] Fill in contact email, website, and retention period
+- [ ] Legal review of cross-border transfer and "separate consent" path
+- [ ] Show privacy policy entry / consent prompt on first launch
+- [ ] Publish the same policy on the website and keep versions consistent
+- [ ] Add a link to this policy next to the "Privacy & Data" toggle in Settings
+- [ ] Configure PostHog data retention policy to match Section 5
+- [ ] Update this policy and re-trigger consent before launching accounts / cloud proxy / payments
